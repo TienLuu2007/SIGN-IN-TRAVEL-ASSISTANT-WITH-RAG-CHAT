@@ -7,7 +7,7 @@
 
 ## 1. Student Information & Chosen City
 
-- **Student Name:** Lưu Minh Tiến *(Update Student ID here if required, e.g., `25xxxxxx`)*
+- **Student Name:** Lưu Minh Tiến *(25127242)*
 - **GitHub Account:** [TienLuu2007](https://github.com/TienLuu2007)
 - **Chosen City:** **Ho Chi Minh City, Vietnam** (`knowledge_base.json` contains 15 curated entries `G01`–`G15` covering museums, markets, landmarks, viewpoints, parks, pagodas, walking streets, river transport, airport buses, and seasonal tips).
 
@@ -92,94 +92,7 @@ Below is the evaluation across **8 test questions** (3 directly answerable, 1 pa
 
 ---
 
-## 5. Computational Thinking Analysis
-
-### 5.1. Abstraction
-- **Assistant Input & Output:**
-  - **Input:** A signed-in user's natural language question $q$ and the cached knowledge base $\mathcal{K}$.
-  - **Output:** A grounded text response citing entry IDs (e.g., `[G01]`) or `"I don't know based on the travel guide."`, accompanied by the top-$k$ retrieved entries and their cosine similarity scores.
-- **Fields Kept in Each Guide Entry (`knowledge_base.json`):**
-  - `id` (e.g., `"G01"`): Unique identifier required for explicit citation in the RAG response and test evaluation.
-  - `title` & `text`: Core semantic content embedded by `embeddinggemma` and injected into the `qwen3:4b` prompt context.
-  - `source`: Provenance of the travel information displayed in the UI.
-  - `category` & `tags`: Structured metadata describing place types (e.g., `"museum"`, `"market"`, `"viewpoint"`) and attributes (`"indoor"`, `"budget"`, `"district-1"`). Ignored during decorative layout, but essential for filtering in Assignment 4 (**RAG-Rec**).
-
-### 5.2. Decomposition
-
-```mermaid
-flowchart LR
-    A["1. Sign-In\n(firebase_client.py)"] -->|"In: email, password\nOut: user session"| B["2. Embed\n(rag.py)"]
-    B -->|"In: question + KB\nOut: q_vec, KB vectors"| C["3. Retrieve\n(rag.py)"]
-    C -->|"In: q_vec, KB, k=3\nOut: top-3 entries + scores"| D["4. Build Context\n(rag.py)"]
-    D -->|"In: top-3 entries\nOut: formatted prompt"| E["5. Generate\n(rag.py)"]
-    E -->|"In: prompt, qwen3:4b\nOut: cited answer"| F["6. Display\n(app.py)"]
-```
-
-| Sub-problem | Input | Output |
-| :--- | :--- | :--- |
-| **1. Sign-In** | User `email` and `password` | Authenticated user object (`email`, `uid`) stored in `st.session_state.user` |
-| **2. Embed** | `knowledge_base.json` (once via `@st.cache_resource`) & user `question` | 1D NumPy embedding vectors from `embeddinggemma` |
-| **3. Retrieve** | Question vector `q_vec`, embedded KB, and $k=3$ | Top-3 guide entries sorted descending by cosine similarity score |
-| **4. Build Context** | Top-3 retrieved dicts (`id`, `title`, `text`, `source`) | Formatted context string + strict system prompt |
-| **5. Generate** | System prompt + context + user question (or threshold check) | Grounded answer from `qwen3:4b` with `[Gxx]` citations (or `"I don't know"`) |
-| **6. Display** | Answer string + top-3 retrieved entries with scores | Streamlit chat bubble + expandable source panel (`st.expander`) |
-
-### 5.3. Pattern Recognition
-- **Reused from Lab 3 & Lab 4:**
-  - From **Lab 3**: Firebase REST Authentication (`signInWithPassword` and `signUp`), storing login state in `st.session_state`, and gating the main application view behind authentication.
-  - From **Lab 4**: Connecting to the remote Ollama server over a Pinggy tunnel (`/api/embeddings` and `/api/chat`), embedding text with `embeddinggemma`, and prompting `qwen3:4b`.
-- **The `filter → score → top-k` Pattern:**
-  - **Where it appears now (`retrieve_top_k` in `rag.py`):**
-    1. **Filter:** Select valid candidate entries from `kb`.
-    2. **Score:** Compute cosine similarity $\frac{\mathbf{q} \cdot \mathbf{e}}{\|\mathbf{q}\|\|\mathbf{e}\|}$ between the query vector and each candidate entry vector.
-    3. **Top-$k$:** Sort candidates in descending order of score and slice `scored[:3]`.
-  - **Where it will appear again in Assignment 4 (RAG-Rec):**
-    - In **RAG-Rec**, the recommender will first **filter** places by the user's preferred `category` (e.g., `"museum"`, `"market"`) or `tags` (e.g., `"indoor"`, `"budget"`), **score** the matching places by tag overlap + embedding similarity to the user's preferences, and return the **top-$k$** recommended places.
-
-### 5.4. Algorithm Design
-
-#### Pseudo-code for Answering One Question
-```text
-ALGORITHM AnswerQuestion(question, kb, k = 3, min_score = 0.35):
-    IF trim(question) is empty THEN
-        DISPLAY warning "Please enter a non-empty question"
-        RETURN
-    END IF
-
-    // Step 1: Embed question
-    q_vec <- EmbedWithGemma(question)
-
-    // Step 2: Filter -> Score -> Top-k
-    candidates <- Filter(kb, entry has valid text)
-    scored <- empty list
-    FOR EACH entry IN candidates DO
-        score <- Dot(q_vec, entry.embedding) / (Norm(q_vec) * Norm(entry.embedding))
-        APPEND (entry, score) TO scored
-    END FOR
-    Sort scored descending by score
-    top_k <- scored[0 : k]
-
-    // Step 3: Two-stage "I don't know" Design Decision
-    IF top_k[0].score < min_score THEN
-        answer <- "I don't know based on the travel guide."
-    ELSE
-        context <- FormatEntriesWithIDs(top_k)
-        answer <- CallQwen3_4B(system_prompt_strict, context, question)
-    END IF
-
-    // Step 4: Display & save to session state
-    DisplayChat(answer, top_k)
-```
-
-#### Key Design Decision (`k = 3` and Two-Stage `"I don't know"` Rule)
-- **Why $k = 3$:** With 15 concise entries in `knowledge_base.json`, retrieving $k = 3$ entries provides enough context for multi-entry or comparison questions (e.g., comparing two markets `[G03]` and `[G06]`) without overwhelming `qwen3:4b` with unrelated noise or slowing down generation over Pinggy.
-- **Two-Stage `"I don't know"` Rule (Real Example):**
-  - *Stage 1 (Similarity Threshold `min_score = 0.35`):* If a user asks something completely unrelated to travel (e.g., *"How do I solve a quadratic equation in Python?"*), the top cosine similarity is `< 0.35`, so the code immediately returns `"I don't know based on the travel guide."` without wasting an LLM call.
-  - *Stage 2 (LLM Grounding Rule):* If a user asks *"What is the ticket price for Dam Sen Water Park?"*, the words *"ticket price"* and *"Park"* give `[G08] Saigon Zoo and Botanical Gardens` a similarity score above `0.35` (e.g., `~0.52`). Stage 2 catches this: `qwen3:4b` reads `[G08]`, `[G10]`, and `[G05]`, sees Dam Sen Water Park is not in the context, and outputs `"I don't know based on the travel guide."`
-
----
-
-## 6. Known Limitations & AI Tools Used
+## 5. Known Limitations & AI Tools Used
 
 ### Known Limitations
 1. **Session Persistence:** By assignment specification, chat history is stored strictly in `st.session_state` (RAM) without Firestore or an external database, so refreshing the browser tab resets the current session.
@@ -191,6 +104,6 @@ ALGORITHM AnswerQuestion(question, kb, k = 3, min_score = 0.35):
 
 ---
 
-## 7. Demonstration Video
+## 6. Demonstration Video
 
-- **Video Link:** `[Insert YouTube / Google Drive Link Here]` *(Ensure sharing permission is set to "Anyone with the link can view")*
+- **Video Link:** `https://drive.google.com/file/d/1MTim2ATGE3kfh8PvC58cuBGc-LIgQVOJ/view?usp=drive_link`
