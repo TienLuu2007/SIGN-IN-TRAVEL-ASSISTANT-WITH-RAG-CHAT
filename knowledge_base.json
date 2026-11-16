@@ -1,0 +1,122 @@
+[
+  {
+    "id": "G01",
+    "title": "Independence Palace (Reunification Palace)",
+    "text": "Independence Palace is a historic government building in District 1 surrounded by large gardens. It is open daily from 8:00 AM to 3:30 PM. Entrance tickets cost 40,000 VND for adults and 20,000 VND for students. Visitors can see the underground command bunker and vintage helicopters on the roof.",
+    "source": "Independence Palace Official Ticket Booth",
+    "category": "museum",
+    "tags": ["history", "architecture", "indoor", "district-1"]
+  },
+  {
+    "id": "G02",
+    "title": "War Remnants Museum",
+    "text": "Located at 28 Vo Van Tan in District 3, the War Remnants Museum exhibits photographs, military equipment, and historic artifacts. It opens every day from 7:30 AM to 5:30 PM, with the last ticket sold at 5:00 PM. Admission is 40,000 VND per person, and audio guides can be rented for an extra 80,000 VND.",
+    "source": "War Remnants Museum Visitor Guide",
+    "category": "museum",
+    "tags": ["history", "culture", "indoor", "district-3"]
+  },
+  {
+    "id": "G03",
+    "title": "Ben Thanh Market",
+    "text": "Ben Thanh Market is a famous indoor marketplace in the center of District 1 selling souvenirs, coffee beans, clothes, and local street food. The daytime market runs from 6:00 AM to 6:00 PM. After 6:00 PM, outdoor night food stalls open along the side streets until 10:00 PM. Entry is free, but bargaining is expected when buying souvenirs.",
+    "source": "Lumen Travel Field Survey",
+    "category": "market",
+    "tags": ["shopping", "street-food", "souvenirs", "district-1"]
+  },
+  {
+    "id": "G04",
+    "title": "Saigon Central Post Office",
+    "text": "Designed in the late 19th century, the Saigon Central Post Office is a working post office with yellow colonial architecture and painted historic maps inside. It is open Monday through Saturday from 7:30 AM to 6:00 PM, and on Sundays from 8:00 AM to 5:00 PM. Admission is completely free.",
+    "source": "Ho Chi Minh City Tourism Board",
+    "category": "landmark",
+    "tags": ["architecture", "history", "free", "district-1"]
+  },
+  {
+    "id": "G05",
+    "title": "Bitexco Financial Tower Skydeck",
+    "text": "The Saigon Skydeck on the 49th floor of the Bitexco Financial Tower offers a 360-degree view of the city and the Saigon River. It is open daily from 9:30 AM to 9:30 PM. Standard adult tickets cost 240,000 VND, while tickets for children and seniors cost 160,000 VND.",
+    "source": "Saigon Skydeck Official Website",
+    "category": "viewpoint",
+    "tags": ["modern", "skyline", "photography", "district-1"]
+  },
+  {
+    "id": "G06",
+    "title": "Binh Tay Market (Cholon)",
+    "text": "Binh Tay Market is the main wholesale market in District 6 (Chinatown), known for its central courtyard garden and traditional roof design. It operates daily from 5:00 AM to 7:30 PM. Visitors come here to buy dried foods, spices, and handicrafts at lower prices than in District 1.",
+    "source": "Lumen Travel Cholon Walking Guide",
+    "category": "market",
+    "tags": ["shopping", "local-life", "chinatown", "district-6"]
+  },
+  {
+    "id": "G07",
+    "title": "Ho Thi Ky Flower Market",
+    "text": "Located in District 10, Ho Thi Ky is the largest wholesale flower market in the city and doubles as a lively evening street food alley. The flower stalls are open 24 hours a day, while the street food vendors operate from 3:00 PM to 11:00 PM. Popular dishes cost between 25,000 VND and 60,000 VND.",
+    "source": "Lumen Travel Street Food Notes",
+    "category": "market",
+    "tags": ["street-food", "nightlife", "flowers", "budget", "district-10"]
+  },
+  {
+    "id": "G08",
+    "title": "Saigon Zoo and Botanical Gardens",
+    "text": "Established in 1864, the Saigon Zoo in District 1 is one of the oldest continuously operating zoos in the world, featuring shaded walking paths and rare plants. Opening hours are 7:00 AM to 5:30 PM every day. Tickets are 60,000 VND for adults and 40,000 VND for children between 1 meter and 1.3 meters tall.",
+    "source": "Saigon Zoo Ticket Counter",
+    "category": "park",
+    "tags": ["nature", "family", "outdoor", "district-1"]
+  },
+  {
+    "id": "G09",
+    "title": "Museum of Fine Arts",
+    "text": "Housed in a bright yellow Art Deco mansion in District 1, the Ho Chi Minh City Museum of Fine Arts displays traditional sculptures, lacquerware, and contemporary Vietnamese paintings. It is open daily from 8:00 AM to 5:00 PM. Entrance tickets cost 30,000 VND per adult.",
+    "source": "HCMC Museum of Fine Arts Brochure",
+    "category": "museum",
+    "tags": ["art", "architecture", "indoor", "district-1"]
+  },
+  {
+    "id": "G10",
+    "title": "Saigon Waterbus (Bach Dang Pier)",
+    "text": "The Saigon Waterbus is a public river ferry starting at Bach Dang Pier in District 1 and traveling along the Saigon River to Thu Duc. Boats depart between 7:00 AM and 9:00 PM according to a fixed schedule. A one-way ticket costs 15,000 VND per passenger regardless of distance, and buying tickets in advance on weekends is recommended.",
+    "source": "Saigon Waterbus Station Schedule",
+    "category": "attraction",
+    "tags": ["river", "sightseeing", "budget", "outdoor", "district-1"]
+  },
+  {
+    "id": "G11",
+    "title": "Airport Transport to City Center",
+    "text": "Travelers arriving at Tan Son Nhat International Airport can take the yellow public Bus 109 or Bus 152 into District 1. Bus 152 operates from 5:30 AM to 7:00 PM and costs 5,000 VND per person, plus 5,000 VND for large luggage. Bus 109 runs from 5:45 AM to 11:40 PM and costs 15,000 VND.",
+    "source": "Tan Son Nhat Airport Transit Guide",
+    "category": "transport",
+    "tags": ["airport", "bus", "budget", "tips"]
+  },
+  {
+    "id": "G12",
+    "title": "Best Season and Weather Tips",
+    "text": "Ho Chi Minh City has a tropical climate with two main seasons. The dry season runs from December to April with average temperatures between 26°C and 35°C. The rainy season lasts from May to November, characterized by short, heavy afternoon downpours. Travelers visiting during the rainy season should carry a light raincoat or umbrella.",
+    "source": "Lumen Travel Weather Handbook",
+    "category": "tips",
+    "tags": ["weather", "planning", "packing"]
+  },
+  {
+    "id": "G13",
+    "title": "Nguyen Hue Walking Street and The Cafe Apartment",
+    "text": "Nguyen Hue Walking Street is a broad pedestrian promenade in District 1 stretching from City Hall to Bach Dang Pier. At 42 Nguyen Hue, a nine-story 1960s apartment block known as The Cafe Apartment houses independent coffee shops and boutiques. The cafés are open daily from 8:00 AM to 10:00 PM. Taking the elevator inside 42 Nguyen Hue costs 3,000 VND, while using the stairs is free.",
+    "source": "Lumen Travel District 1 Walking Guide",
+    "category": "street",
+    "tags": ["walking-street", "cafe", "nightlife", "photography", "district-1"]
+  },
+  {
+    "id": "G14",
+    "title": "Jade Emperor Pagoda (Chua Ngoc Hoang)",
+    "text": "Built in 1909 by the Cantonese community, the Jade Emperor Pagoda at 73 Mai Thi Luu in District 1 is famous for its intricate woodcarvings, incense-filled halls, and pond of tortoises. It is open every day from 7:00 AM to 6:00 PM. Admission is free, and visitors are required to dress modestly covering shoulders and knees.",
+    "source": "Ho Chi Minh City Heritage Directory",
+    "category": "pagoda",
+    "tags": ["culture", "history", "spiritual", "free", "district-1"]
+  },
+  {
+    "id": "G15",
+    "title": "Cu Chi Tunnels (Ben Dinh Sector)",
+    "text": "Located about 50 kilometers northwest of central Ho Chi Minh City, the Cu Chi Tunnels are an extensive underground network used during the war. The Ben Dinh visitor site is open daily from 7:00 AM to 5:00 PM. Entrance tickets cost 125,000 VND per adult, which includes a short documentary film and a guided walk through preserved tunnel sections.",
+    "source": "Cu Chi Historical Site Ticket Office",
+    "category": "attraction",
+    "tags": ["history", "outdoor", "tunnels", "half-day-trip", "cu-chi"]
+  }
+]
